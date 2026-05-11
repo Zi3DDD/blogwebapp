@@ -9,12 +9,12 @@
 <body>
 
     <header class="blog-header">
-        <h1>Mijn Blog</h1>
+        <h1>Vakantie Blog</h1>
         <p>De laatste artikelen en tips</p>
     </header>
 
     <main class="artikel-container">
-        <a href="index.html" class="terug-knop">&larr; Terug naar overzicht</a>
+        <a href="index.php" class="terug-knop">&larr; Terug naar overzicht</a>
         
         <article class="volledig-artikel">
             <h1 class="artikel-titel">Hotel in Bali</h1>

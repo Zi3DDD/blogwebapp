@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Blogs</title>
+    <title>Vakantie Blogs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="blog-header">
-        <h1>Hotel Blogs</h1>
+        <h1>Vakantie Blogs</h1>
         <p>De laatste artikelen en tips</p>
     </header>
 
