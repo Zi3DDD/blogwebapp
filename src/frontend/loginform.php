@@ -1,8 +1,23 @@
 <html>
     <head>
-        <link rel="stylesheet" href="form.css">
+        <link rel="stylesheet" href="styles/form.css">
     </head>
+
+
+
 <body>
+<nav>
+    <img src="images/logo.png" alt="logo vacantie blog">
+
+   
+        <ul>
+        <li><a href="default.asp">Home</a></li>
+        <li><a href="news.asp">News</a></li>
+        <li><a href="contact.asp">Contact</a></li>
+        <li><a href="about.asp">About</a></li>
+        </ul>
+
+</nav>
 
 <form  class="form"action="register.php" method="post">
     <h1> Register </h1>
