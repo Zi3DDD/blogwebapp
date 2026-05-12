@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vakantie Blogs</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 
     <article class="blog-kaart">
         <div class="kaart-foto">
-            <img src="frontend/IMG/Kamer 1.jpg" alt="Wandelen in de natuur">
+            <img src="images/Kamer 1.jpg" alt="Wandelen in de natuur">
         </div>
         
         <div class="kaart-inhoud">
@@ -39,7 +39,7 @@
 
     <article class="blog-kaart">
         <div class="kaart-foto">
-            <img src="IMG/Kamer 2.jpg" alt="Gezonde Ontbijtrecepten">
+            <img src="images/Kamer 2.jpg" alt="Gezonde Ontbijtrecepten">
         </div>
         
         <div class="kaart-inhoud">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wandelen in de Natuur - Mijn Blog</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             <h1 class="artikel-titel">Hotel in Bali</h1>
             <p class="meta-tekst">10 maart 2026 | Hotel</p>
             
-            <img src="IMG/Kamer 1.jpg" alt="Wandelen in de natuur" class="artikel-hoofdfoto">
+            <img src="images/Kamer 1.jpg" alt="Wandelen in de natuur" class="artikel-hoofdfoto">
             
             <div class="artikel-tekst">
                 <p>Ontdek de prachtigste hotels op Bali en geniet van de ontspannen sfeer en adembenemende natuur. Het 'Eiland van de Goden' heeft verrassend veel te bieden als het gaat om unieke en sfeervolle accommodaties.</p>
@@ -32,9 +32,9 @@
             <div class="fotogalerij">
                 <h3>Meer foto's</h3>
                 <div class="galerij-grid">
-                    <img src="IMG/Kamer 1.jpg" alt="Foto 1" class="galerij-foto">
-                    <img src="IMG/Kamer 2.jpg" alt="Foto 2" class="galerij-foto">
-                    <img src="IMG/Kamer 1.jpg" alt="Foto 3" class="galerij-foto">
+                    <img src="images/Kamer 1.jpg" alt="Foto 1" class="galerij-foto">
+                    <img src="images/Kamer 2.jpg" alt="Foto 2" class="galerij-foto">
+                    <img src="images/Kamer 1.jpg" alt="Foto 3" class="galerij-foto">
                 </div>
 
         <div class="delen-opties">
