@@ -26,7 +26,7 @@
 
     <article class="blog-kaart">
         <div class="kaart-foto">
-            <img src="IMG/Kamer 1.jpg" alt="Wandelen in de natuur">
+            <img src="frontend/IMG/Kamer 1.jpg" alt="Wandelen in de natuur">
         </div>
         
         <div class="kaart-inhoud">
