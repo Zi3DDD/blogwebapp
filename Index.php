@@ -13,6 +13,15 @@
         <p>De laatste artikelen en tips</p>
     </header>
 
+        <div class="categorie-filters">
+            <input class="filter-input" placeholder="Zoeken..." type="search" id="site-search" name="q" />
+            <button class="filter-knop">Zoek</button>
+            <a href="#" class="filter-knop actief">Alle Hotels</a>
+            <a href="#" class="filter-knop">Avontuurlijk</a>
+            <a href="#" class="filter-knop">Centrum</a>
+            <a href="#" class="filter-knop">Rust</a>
+        </div>
+
 <main class="blog-lijst">
 
     <article class="blog-kaart">
@@ -40,12 +49,13 @@
             <a href="blog.php" class="lees-meer-knop">Lees meer</a>
         </div>
     </article>
-<div class="categorie-filters">
-    <a href="#" class="filter-knop actief">Alles</a>
-    <a href="#" class="filter-knop">Natuur</a>
-    <a href="#" class="filter-knop">Gezondheid</a>
-    <a href="#" class="filter-knop">Hotel</a>
-</div>
+
+    <div class="categorie-filters">
+            <input class="filter-input" type="text" placeholder="Naam" name="Naam" required>
+            <input class="filter-input" type="text" placeholder="E-mail adres" name="mail" required>
+            <button class="filter-knop">Submit</button>
+    </div>
+
 </main>
 
 </body>

@@ -36,6 +36,14 @@
                     <img src="IMG/Kamer 2.jpg" alt="Foto 2" class="galerij-foto">
                     <img src="IMG/Kamer 1.jpg" alt="Foto 3" class="galerij-foto">
                 </div>
+
+        <div class="delen-opties">
+            <h3>Deel dit artikel</h3>
+            <a href="#" class="deel-knop">Facebook</a>
+            <a href="#" class="deel-knop">Instagram</a>
+            <a href="#" class="deel-knop">Tiktok</a> 
+            <a href="http://localhost/Blogwebapp/blog.php" class="deel-knop">Kopieer link</a>
+        </div>               
 <section class="reactie-sectie">
                 <h3>Reacties (2)</h3>
 
