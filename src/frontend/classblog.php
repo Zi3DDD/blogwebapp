@@ -54,9 +54,9 @@ function readBlog(){
 
 /*
         $this->pdo->beginTransaction();
-        $stmt3 = $this->pdo->prepare("SELECT blog_content.titel , blog_content.text , header_image.filename , 
-        header_image.url FROM blog_content INNER JOIN header_image 
-        ON blog_content.header_image_id = header_image.header_id");
+        $stmt3 = $this->pdo->prepare("SELECT blog.titel , blog.text , image.filename , 
+        image.url FROM blog INNER JOIN image 
+        ON blog.image_id = image.header_id");
         $stmt3->execute();
         $user = $stmt3->fetchAll();
          // $valid = is_array($user);
