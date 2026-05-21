@@ -5,12 +5,12 @@ require('classblog.php');
 
     
     $filename = $_FILES['foto']['name'];
-    $file_path = '/uploads/' . $filename;
+    $file_path = 'uploads/' . $filename;
     $title =  $_POST["title"];
     $text =  $_POST["text"];
     $category = $_POST["categorie"];
  echo $title. $text .$category;
- move_uploaded_file($_FILES['foto']['tmp_name'], __DIR__ . $file_path);
+ move_uploaded_file($_FILES['foto']['tmp_name'], __DIR__ . '/' . $file_path);
 
 $_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog->error;
   /*

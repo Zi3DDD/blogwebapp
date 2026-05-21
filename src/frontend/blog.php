@@ -1,15 +1,30 @@
+<?php
+require_once 'classblog.php';
+
+$blog_id = $_GET['id'] ?? 0; // De '??' is een superkorte versie van isset()!
+$blog = null;
+
+// Zoek direct de juiste blog in de lijst
+foreach ($_Blog->readBlog(100, 0) as $b) {
+    if ($b['id'] == $blog_id) $blog = $b;
+}
+
+// Geen blog gevonden of geen ID in de link? Direct terug naar index.
+if (!$blog) { header("Location: index.php"); exit; }
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wandelen in de Natuur - Mijn Blog</title>
+    <title><?= htmlspecialchars($blog['titel']) ?> - Mijn Blog</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
     <header class="blog-header">
-        <h1>Vakantie Blog</h1>
+        <h1><a href="index.php" style="text-decoration: none; color: inherit;">Vakantie Blogs</a></h1>
         <p>De laatste artikelen en tips</p>
     </header>
 
@@ -17,46 +32,29 @@
         <a href="index.php" class="terug-knop">&larr; Terug naar overzicht</a>
         
         <article class="volledig-artikel">
-            <h1 class="artikel-titel">Hotel in Bali</h1>
-            <p class="meta-tekst">10 maart 2026 | Hotel</p>
+            <h1 class="artikel-titel"><?= htmlspecialchars($blog['titel']) ?></h1>
             
-            <img src="images/Kamer 1.jpg" alt="Wandelen in de natuur" class="artikel-hoofdfoto">
+            <p class="meta-tekst">
+                <?= date('d-m-Y', strtotime($blog['created_at'])) ?> | <?= htmlspecialchars($blog['categorie']) ?>
+            </p>
+            
+            <img src="uploads/<?= htmlspecialchars($blog['filename']) ?>" alt="<?= htmlspecialchars($blog['titel']) ?>" class="artikel-hoofdfoto">
             
             <div class="artikel-tekst">
-                <p>Ontdek de prachtigste hotels op Bali en geniet van de ontspannen sfeer en adembenemende natuur. Het 'Eiland van de Goden' heeft verrassend veel te bieden als het gaat om unieke en sfeervolle accommodaties.</p>
-
-                <p>Of je nu houdt van een rustige villa met uitzicht op de uitgestrekte rijstvelden, of liever relaxt in een luxe resort direct aan het strand, er is voor ieder wat wils. In deze blog deel ik mijn top 3 favoriete hotels op Bali die je absoluut een keer bezocht moet hebben.</p>
-
-                <p>Vergeet niet om luchtige kleding in te pakken en je alvast te verheugen op de magische zonsondergangen!</p>
+                <?= nl2br(htmlspecialchars($blog['text'])) ?>
             </div>
-            <div class="fotogalerij">
-                <h3>Meer foto's</h3>
-                <div class="galerij-grid">
-                    <img src="images/Kamer 1.jpg" alt="Foto 1" class="galerij-foto">
-                    <img src="images/Kamer 2.jpg" alt="Foto 2" class="galerij-foto">
-                    <img src="images/Kamer 1.jpg" alt="Foto 3" class="galerij-foto">
-                </div>
 
-        <div class="delen-opties">
-            <h3>Deel dit artikel</h3>
-            <a href="#" class="deel-knop">Facebook</a>
-            <a href="#" class="deel-knop">Instagram</a>
-            <a href="#" class="deel-knop">Tiktok</a> 
-            <a href="http://localhost/Blogwebapp/blog.php" class="deel-knop">Kopieer link</a>
-        </div>               
-<section class="reactie-sectie">
-                <h3>Reacties (2)</h3>
+            <div class="delen-opties">
+                <h3>Deel dit artikel</h3>
+                <a href="#" class="deel-knop">Facebook</a>
+                <a href="#" class="deel-knop">Instagram</a>
+                <a href="#" class="deel-knop">Tiktok</a> 
+                <a href="blog.php?id=<?= $blog['id'] ?>" class="deel-knop">Kopieer link</a>
+            </div>               
 
-                <div class="reacties-lijst">
-                    <div class="reactie">
-                        <p class="reactie-auteur"><strong>Jan de Vries</strong> <span class="reactie-datum">- 21 april 2026</span></p>
-                        <p>Wat een geweldige blog! Bedankt voor het delen.</p>
-                    </div>
-                    <div class="reactie">
-                        <p class="reactie-auteur"><strong>Lisa Bakker</strong> <span class="reactie-datum">- 22 april 2026</span></p>
-                        <p>Mooie foto's ook!</p>
-                    </div>
-                </div>
+            <section class="reactie-sectie">
+                <h3>Reacties</h3>
+                <p>Er zijn nog geen reacties voor dit bericht.</p>
 
                 <div class="reactie-formulier-container">
                     <h4>Laat een reactie achter</h4>
@@ -71,7 +69,6 @@
                     </form>
                 </div>
             </section>
-            </div>
         </article>
     </main>
 
