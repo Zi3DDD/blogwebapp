@@ -84,3 +84,10 @@ nav ul{
     margin-left: 74%;
 
 }
+
+select.categorie {
+    width: 100%;
+    padding: 6%;
+    border-radius: 20px;
+    background-color: var(--grey);
+}

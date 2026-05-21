@@ -1,0 +1,7 @@
+Fatal error: Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause' in /var/www/html/frontend/classblog.php:117 Stack trace: #0 /var/www/html/frontend/classblog.php(117): PDOStatement->execute() 
+
+
+
+
+
+#1 /var/www/html/frontend/delete.php(11): Blog->deleteBlog('2') #2 {main} thrown in /var/www/html/frontend/classblog.php on line 117

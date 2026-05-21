@@ -1,5 +1,14 @@
 <?php
-require('classblog.php');
+include 'classblog.php';
+
+
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+
+
+
 
   if(isset($_POST["safe"])){    
 
@@ -12,9 +21,33 @@ require('classblog.php');
  echo $title. $text .$category;
  move_uploaded_file($_FILES['foto']['tmp_name'], __DIR__ . $file_path);
 
-$_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog->error; }
+$_Blog->updateBlog($id,$title,$text,$filename,$file_path,$category) ? "OK" : $_Blog->error;}
 
 
+
+
+
+
+
+
+
+
+
+
+
+    
+
+ $data1 = $_Blog->readUpdate($id);
+ var_dump($data1);
+foreach($data1 as $row){
+
+//$_Blog->updateBlog($id);
+
+
+?>
+
+
+<?php
 ?>
 
 
@@ -41,12 +74,12 @@ $_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog-
 
  <form  enctype="multipart/form-data" method="post">
      <br>
-     <input placeholder="Title"  class="input" type="text" name="title">
+     <input class="input" type="text" name="title" value="<?php echo $row['titel']; ?>">
       <br>
      <input type="file"  name="foto" />
      <br>
      
-        <select id="categorie" name="categorie" value="categorie">
+        <select id="categorie" name="categorie" value="<?php echo $row['categorie']; ?>">
         <option value="Bergen">Bergen</option>
         <option value="Zee">Zee</option>
         <option value="Stad">Stad</option>
@@ -54,7 +87,7 @@ $_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog-
         </select>
         <label for="categorie">Kies een caterogie</label>
     <br>
-     <textarea  name="text" rows="10" cols="50">Begin you story here</textarea>
+     <textarea  name="text" rows="10" cols="50"><?php echo $row['text']; ?></textarea>
     <br>
      <button type="submit" name="safe">Blog aanmaken</button>
 </form>
@@ -64,4 +97,6 @@ $_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog-
 
 
 
-<html>
+</html>
+
+<?php   }}?>

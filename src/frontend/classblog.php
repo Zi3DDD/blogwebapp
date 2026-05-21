@@ -15,7 +15,7 @@ class Blog {
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
-    echo "it worked";
+    
   }
 
 
@@ -49,31 +49,113 @@ function createBlog($title,$text,$filename,$file_path,$category){
         $stmt1->execute();
         $this->pdo->commit();
     } // End create
-/*
+
 function readBlog(){
 
-/*
-        $this->pdo->beginTransaction();
-        $stmt3 = $this->pdo->prepare("SELECT blog.titel , blog.text , image.filename , 
-        image.url FROM blog INNER JOIN image 
-        ON blog.image_id = image.header_id");
-        $stmt3->execute();
-        $user = $stmt3->fetchAll();
+        $stmt = $this->pdo->prepare("SELECT blog.id, blog.titel , blog.text , image.filename , blog.created_at , blog.categorie ,
+
+        image.url FROM blog INNER JOIN image
+
+        ON blog.header_image_id = image.image_id");
+        $stmt->execute();
          // $valid = is_array($user);
-        $this->pdo->commit();
+       
         // print_r($user)."<br />\n";
-         $data = $user;
-        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
         
 
-        foreach ($data as $row) {
-       echo "titel:  ". $row['titel']."text:".$row['text']."Filename: ".$row['filename']."<br />\n";
+          
+        
+}
+
+function updateBlog( $id ,$title,$text,$filename,$file_path,$category){
+
+       $stmt = $this->pdo->prepare("SELECT * FROM image WHERE filename = ?");
+       $stmt->bindParam(1, $filename);
+       $stmt->execute();
+       if($row = $stmt->fetch()){
+       $exsisting_image_id = $row['image_id'];
+
+      
+      $this->pdo->beginTransaction();
+      $stmt2 = $this->pdo->prepare('UPDATE blog 
+      SET titel = ?, text = ?, header_image_id = ? , categorie = ?
+      WHERE id = ?') ; 
+      $stmt2->bindParam(1, $title);
+      $stmt2->bindParam(2, $text);
+      $stmt2->bindParam(3, $exsisting_image_id);
+      $stmt2->bindParam(4, $category);
+      $stmt2->bindParam(5, $id);
+      $stmt2->execute();
+      $this->pdo->commit(); 
+
+
+
+
+}else{
+ $stmt1 = $this->pdo->prepare('INSERT INTO image(filename, url )  VALUES( ? ,?) ') ;  
+        $stmt1->bindParam(1, $filename);
+        $stmt1->bindParam(2, $file_path);
+        $stmt1->execute();
+        $last_id = $this->pdo->lastInsertId();
+        
+
+
+        $this->pdo->beginTransaction();
+        $stmt2 = $this->pdo->prepare('UPDATE blog 
+     SET titel = ?, text = ?, header_image_id = ? , categorie = ?
+     WHERE id = ?') ; 
+        $stmt2->bindParam(1, $title);
+        $stmt2->bindParam(2, $text);
+        $stmt2->bindParam(3, $last_id);
+        $stmt2->bindParam(4, $category);
+        $stmt2->bindParam(5, $id);
+        $stmt2->execute();
+        $this->pdo->commit();  
+
+}
+
+      
+    
+       
+
+
+}
+
+function readUpdate($id){
+  $stmt = $this->pdo->prepare("SELECT * FROM blog WHERE id = ?");
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+
+
+
+
+function deleteBlog($id){
+   $this->pdo->beginTransaction();
+
+  $stmt = $this->pdo->prepare("SELECT header_image_id FROM blog WHERE id = ?");
+  $stmt->bindParam(1, $id);
+  $stmt->execute();
+  $header_image_id = $stmt->fetchColumn();
+
+  $stmt2 = $this->pdo->prepare("DELETE FROM blog WHERE id = ?");
+  $stmt2->bindParam(1, $id);
+  $stmt2->execute();
+
+  $stmt1= $this->pdo->prepare("DELETE FROM image WHERE image_id = ?");
+  $stmt1->bindParam(1, $header_image_id);
+  $stmt1->execute();
+  $this->pdo->commit();
+
 }
        }
 //end read */
 
-//end class
-}
+//end classhi
 
 
 define("DB_HOST", "mysql_db1");
