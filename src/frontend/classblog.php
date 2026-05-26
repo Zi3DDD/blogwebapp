@@ -2,12 +2,11 @@
 class Blog {
 
 
-  // (A) CONSTRUCTOR - CONNECT TO THE DATABASE
+  
   private $pdo = null;
   private $stmt = null;
   public $error;
-
-  //  connection 
+   // pdo connectie  wordt hier gemaakt .
   function __construct () {
       $this->pdo = new PDO(
       "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=".DB_CHARSET,
@@ -19,7 +18,7 @@ class Blog {
   }
 
 
-  // beginning connection destruction
+  //Connectie vernietigen zodat ombefoegde mensen er niet bij kunnen 
 function __destruct(){
     if($this->stmt !== null){
         $this->stmt = null;
@@ -28,7 +27,9 @@ function __destruct(){
         $this->pdo = null;
     }
 }
-  //Insert a blog in to the blog table 
+  // Hier begint de crud operaties van de blog. 
+
+  // Bij create blog kan je  een blog toeveogen bij de aan de database. Tergelijkertijd wordt er ook een afbeelding toeggevoegd aan de database.
 
 function createBlog($title,$text,$filename,$file_path,$category){
         
@@ -50,6 +51,8 @@ function createBlog($title,$text,$filename,$file_path,$category){
         $this->pdo->commit();
     } // End create
 
+
+    // Hier wordt de opgeslagen blog informatie  opgehaald uit de database. Tergelijkten tijd wordt er ook de jusite afbeelding opgehaaldt uit de database. 
 function readBlog(){
 
         $stmt = $this->pdo->prepare("SELECT blog.id, blog.titel , blog.text , image.filename , blog.created_at , blog.categorie ,
@@ -67,7 +70,7 @@ function readBlog(){
           
         
 }
-
+// hier worden de bij elkaar hoorende blog en afbeelding geupdate.  Er wordt ook gegekeken of de afbeelding al bestaat zo ja dan krijgt de afbeelding de juiste waarde toegevoegd.
 function updateBlog( $id ,$title,$text,$filename,$file_path,$category){
 
        $stmt = $this->pdo->prepare("SELECT * FROM image WHERE filename = ?");
@@ -116,8 +119,7 @@ function updateBlog( $id ,$title,$text,$filename,$file_path,$category){
 }
 
       
-    
-       
+// hier wordt je juiste blog en afbeelding informatie opgehaald om te laten zien wat er al was zodat je dat kan updaten.
 
 
 }
@@ -131,7 +133,7 @@ function readUpdate($id){
 }
 
 
-
+// hier wordt de juiste blog en afbeelding informatie verwijderd uit de database.
 
 
 function deleteBlog($id){
@@ -153,9 +155,8 @@ function deleteBlog($id){
 
 }
        }
-//end read */
 
-//end classhi
+// hier worden de jusite  parameters aan de blog meegegeven zodat er een connectie gemaakt kan worden met de database.
 
 
 define("DB_HOST", "mysql_db1");

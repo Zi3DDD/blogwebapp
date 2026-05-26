@@ -1,6 +1,8 @@
 <?php
 require('classblog.php');
 
+// Hier wodt allen blogs opgehaald uit de database afhankelijk welke rol je hebt. 
+
 ?>
 
 <html>

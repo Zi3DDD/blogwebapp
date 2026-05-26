@@ -1,7 +1,6 @@
 <?php
 include 'classblog.php';
-
-
+// hier wordt oude informatie opgehaald van een blog en kan je die oude info bewerken en de gegevens updaten .
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -41,7 +40,6 @@ $_Blog->updateBlog($id,$title,$text,$filename,$file_path,$category) ? "OK" : $_B
  var_dump($data1);
 foreach($data1 as $row){
 
-//$_Blog->updateBlog($id);
 
 
 ?>

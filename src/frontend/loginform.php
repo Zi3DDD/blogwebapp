@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require('classuser.php');
   if(isset($_POST["register"])) {
 
@@ -8,9 +10,23 @@ require('classuser.php');
     $user_nickname = $_POST["user_nickname"];
     $role_id = $_POST["role_id"];
    
-    echo $user_email. $user_password .$role_id .$user_nickname;
+//echo $user_email. $user_password .$role_id .$user_nickname;
 
 $_User->register($user_email,$user_password,$role_id ,$user_nickname) ? "OK" : $_User->error;
+
+}
+
+
+
+  if(isset($_POST["login"])) {
+
+    $user_email =  $_POST["email"];
+    $user_password =  $_POST["password"];
+    $user_nickname = $_POST["user_nickname"];
+    $role_id = $_POST["role_id"];
+   
+
+$_User->login($user_email,$user_password) ? "OK" : $_User->error;
 
 }
 
@@ -57,12 +73,14 @@ $_User->register($user_email,$user_password,$role_id ,$user_nickname) ? "OK" : $
 </form>
 
 
-<form  class="form" action="login.php" method="post">
+<form  class="form"  method="post">
         <h1>Login
             </h1>
  <input placeholder="email"  class="input" type="text" name="email"><br>
  <input placeholder="password"  class="input" type="password" name="password"><br>
-<input type="submit" name="btn_login" value="login" >
+<input type="submit" name="login" value="login" >
 </form>
 
 </body>
+
+

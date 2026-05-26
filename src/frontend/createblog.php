@@ -1,6 +1,9 @@
 <?php
 require('classblog.php');
 
+// afhankelijk welke rol je hebt kun je een blog aanmaken.
+// hier form informatie gevalideerd. en wordt de data naar de juiste plekken toegestuurd fotos gaan naar de upload map en allen andere waarden gaat de database in . 
+
   if(isset($_POST["safe"])){    
 
     
@@ -16,7 +19,6 @@ $_Blog->createBlog($title,$text,$filename,$file_path,$category) ? "OK" : $_Blog-
 
 
 ?>
-
 
 <html>
 
