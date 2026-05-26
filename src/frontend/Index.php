@@ -4,6 +4,18 @@ require_once 'classblog.php';
 // functie blog aanroepen
 $blogs = $_Blog->readBlog();
 
+if(isset($_GET['q'])) {
+    $blogs = $_Blog->zoek($_GET['q']);
+}
+
+if (isset($_GET['cat']) && $_GET['cat'] != '') {
+    $blogs = $_Blog->filtercategorie($_GET['cat']);
+}
+
+if(isset($_POST['naam']) && isset($_POST['email'])) {
+    $_Blog->nieuwsbrief($_POST['naam'], $_POST['email']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +24,7 @@ $blogs = $_Blog->readBlog();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vakantie Blogs</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
@@ -22,16 +34,21 @@ $blogs = $_Blog->readBlog();
     </header>
 
     <div class="categorie-filters">
-        <input class="filter-input" placeholder="Zoeken..." type="search" id="site-search" name="q" />
-        <button class="filter-knop">Zoek</button>
-        <a href="#" class="filter-knop actief">Alle Hotels</a>
-        <a href="#" class="filter-knop">Bergen</a>
-        <a href="#" class="filter-knop">Zee</a>
-        <a href="#" class="filter-knop">Stad</a>
-        <a href="#" class="filter-knop">Bossen</a>
+
+        <form method="get" action="index.php" style="display: inline-block;">
+            <input class="filter-input" placeholder="Zoeken..." type="search" id="site-search" name="q" />
+            <button type="submit" class="filter-knop">Zoeken</button>
+        </form>
+
+<a href="index.php" class="filter-knop <?= empty($_GET['cat']) && empty($_GET['q']) ? 'actief' : '' ?>">Alle Hotels</a>
+        <a href="index.php? cat=Bergen" class="filter-knop   <?= (isset($_GET['cat']) && $_GET['cat'] == 'Bergen') ? 'actief' : '' ?>">Bergen</a>
+        <a href="index.php? cat=Zee" class="filter-knop      <?= (isset($_GET['cat']) && $_GET['cat'] == 'Zee') ? 'actief' : '' ?>">Zee</a>
+        <a href="index.php? cat=Stad" class="filter-knop     <?= (isset($_GET['cat']) && $_GET['cat'] == 'Stad') ? 'actief' : '' ?>">Stad</a>
+        <a href="index.php? cat=Bossen" class="filter-knop   <?= (isset($_GET['cat']) && $_GET['cat'] == 'Bossen') ? 'actief' : '' ?>">Bossen</a>
     </div>
 
     <main class="blog-lijst">
+
 
         <?php if (count($blogs) > 0): ?>
             <?php foreach ($blogs as $blog): ?>
@@ -60,10 +77,12 @@ $blogs = $_Blog->readBlog();
             <p>Er zijn op dit moment nog geen blogs gevonden.</p>
         <?php endif; ?>
 
-        <div class="categorie-filters" style="margin-top: 40px;">
-            <input class="filter-input" type="text" placeholder="Naam" name="Naam">
-            <input class="filter-input" type="email" placeholder="E-mail adres" name="mail">
+<div class="nieuwsbrief-sectie">
+    <form class="nieuwsbrief-balk"method="post" action="index.php" style="display: inline-block;">
+            <input class="filter-input" placeholder="Naam" type="text" id="" name="naam" />
+            <input class="filter-input" type="email" placeholder="E-mail adres" name="email">
             <button class="filter-knop">Submit</button>
+        </form>
         </div>
 
     </main>

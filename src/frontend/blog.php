@@ -19,7 +19,7 @@ if (!$blog) { header("Location: index.php"); exit; }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($blog['titel']) ?> - Mijn Blog</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/blog.css">
 </head>
 <body>
 

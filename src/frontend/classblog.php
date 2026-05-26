@@ -53,12 +53,8 @@ function createBlog($title,$text,$filename,$file_path,$category){
 function readBlog(){
  
         $stmt = $this->pdo->prepare("SELECT blog.id, blog.titel , blog.text , image.filename , blog.created_at , blog.categorie ,
-        image.url FROM blog INNER JOIN image
-        ON blog.header_image_id = image.image_id");
+        image.url FROM blog INNER JOIN image ON blog.header_image_id = image.image_id ORDER BY blog.created_at DESC");
         $stmt->execute();
-         // $valid = is_array($user);
-       
-        // print_r($user)."<br />\n";
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
         
  
@@ -151,42 +147,28 @@ function deleteBlog($id){
   $this->pdo->commit();
  
 }
-       }
 
-function zoekblog($zoekterm){
-    $stmt = $this->pdo->prepare("SELECT blog.id, blog.titel, blog.text, image.filename, blog.created_at, blog.categorie, image.url AS image_url 
-                                 FROM blog 
-                                 INNER JOIN image ON blog.header_image_id = image.image_id
-                                 WHERE blog.titel LIKE ? OR blog.text LIKE ?");
-    
-    // Tussen %""% bevat de woord
-    $term = "%$zoekterm%";
-    
-    //Voer uit met zoek term
-    $stmt->execute([$term]);
-    
-    //Geef de gevonden lijst terug
+function zoek($zoekwoord){
+    $stmt = $this->pdo->prepare("SELECT blog.*, image.filename FROM blog INNER JOIN image ON blog.header_image_id = image.image_id WHERE blog.titel LIKE ?");
+    $stmt->execute(["%$zoekwoord%"]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function filterOpCategorie($categorie){
-    // categorie moet matchen
-    $stmt = $this->pdo->prepare("SELECT blog.id, blog.titel, blog.text, image.filename, blog.created_at, blog.categorie, image.url AS image_url 
-                                 FROM blog 
-                                 INNER JOIN image ON blog.header_image_id = image.image_id
-                                 WHERE blog.categorie = :gekozen_categorie");
-    
-    // Koppel het woordje aan de query
-    $stmt->bindValue(':gekozen_categorie', $categorie);
-    
-    // Voer uit en geef terug
+function filtercategorie($categorie){
+      $stmt = $this->pdo->prepare("SELECT blog.*, image.filename FROM blog INNER JOIN image ON blog.header_image_id = image.image_id WHERE blog.categorie = ?");
+      $stmt->bindParam(1, $categorie);
+      $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function nieuwsbrief($naam, $email){
+    $stmt = $this->pdo->prepare('INSERT INTO subscriber (naam, email) VALUES (?, ?)');
+    $stmt->bindParam(1, $naam);
+    $stmt->bindParam(2, $email);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
 }
-
-//end read */
- 
-//end classhi
+       }
  
  
 define("DB_HOST", "mysql_db1");
